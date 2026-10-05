@@ -38,6 +38,12 @@ class BenchmarkRunner {
     required bool Function() isCancelled,
   }) async {
     final device = await _deviceMetadataService.load();
+    if (config.engines.contains(BenchmarkEngine.sqfliteSqlcipher)) {
+      onLog(BenchmarkLogEntry(
+        timestamp: DateTime.now(),
+        message: '[Device] Hardware AES: ${_hardwareAesLabel(device.hardwareAes)}',
+      ));
+    }
     final runs = <BenchmarkRun>[];
 
     for (final engine in config.engines) {
@@ -286,6 +292,12 @@ class BenchmarkRunner {
             (config.recordCount * 4) +
             config.mixedOperations;
     }
+  }
+
+  String _hardwareAesLabel(bool? hasHardwareAes) {
+    if (hasHardwareAes == true) return 'available';
+    if (hasHardwareAes == false) return 'not detected';
+    return 'unknown';
   }
 
   DatabaseAdapter _adapterFor(BenchmarkEngine engine) {

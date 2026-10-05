@@ -33,6 +33,7 @@ BenchmarkRun _makeRun(BenchmarkEngine engine) => BenchmarkRun(
         osVersion: '14',
         appVersion: '1.0.0',
         buildMode: 'profile',
+        hardwareAes: true,
       ),
       success: true,
     );
@@ -47,6 +48,7 @@ void main() {
         expect(restored.engine, engine);
         expect(restored.summary.p95Ms, 10);
         expect(restored.config.engines, [engine]);
+        expect(restored.deviceMetadata.hardwareAes, true);
       });
     }
   });
@@ -56,5 +58,14 @@ void main() {
     final json = run.toJson()..['engine'] = 'unknown_engine';
     final restored = BenchmarkRun.fromJson(json);
     expect(restored.engine, BenchmarkEngine.sqflite);
+  });
+
+  test('fromJson keeps compatibility when hardware AES field is missing', () {
+    final run = _makeRun(BenchmarkEngine.sqflite);
+    final json = run.toJson();
+    (json['deviceMetadata'] as Map<String, dynamic>).remove('hardwareAes');
+
+    final restored = BenchmarkRun.fromJson(json);
+    expect(restored.deviceMetadata.hardwareAes, isNull);
   });
 }

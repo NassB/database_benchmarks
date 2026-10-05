@@ -41,6 +41,11 @@ class BenchmarkDetailScreen extends StatelessWidget {
                   Text('ops/s: ${run.summary.opsPerSec.toStringAsFixed(2)}'),
                   Text('db size: ${run.summary.dbSizeBytes} bytes'),
                   Text('wal size: ${run.summary.walSizeBytes} bytes'),
+                  const SizedBox(height: 8),
+                  Text('device: ${run.deviceMetadata.device}'),
+                  Text('os: ${run.deviceMetadata.osVersion}'),
+                  Text('build: ${run.deviceMetadata.buildMode}'),
+                  Text('hardware AES: ${_hardwareAesLabel(run.deviceMetadata.hardwareAes)}'),
                 ],
               ),
             ),
@@ -224,6 +229,12 @@ class _GlossaryRow extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _hardwareAesLabel(bool? hasHardwareAes) {
+    if (hasHardwareAes == true) return 'available';
+    if (hasHardwareAes == false) return 'not detected';
+    return 'unknown';
   }
 }
 
