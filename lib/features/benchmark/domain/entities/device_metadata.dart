@@ -5,6 +5,7 @@ class DeviceMetadata {
     required this.osVersion,
     required this.appVersion,
     required this.buildMode,
+    required this.hardwareAes,
   });
 
   final String device;
@@ -12,6 +13,7 @@ class DeviceMetadata {
   final String osVersion;
   final String appVersion;
   final String buildMode;
+  final bool? hardwareAes;
 
   Map<String, dynamic> toJson() => {
         'device': device,
@@ -19,6 +21,7 @@ class DeviceMetadata {
         'osVersion': osVersion,
         'appVersion': appVersion,
         'buildMode': buildMode,
+        'hardwareAes': hardwareAes,
       };
 
   factory DeviceMetadata.fromJson(Map<String, dynamic> json) {
@@ -28,6 +31,7 @@ class DeviceMetadata {
       osVersion: json['osVersion'] as String,
       appVersion: json['appVersion'] as String,
       buildMode: json['buildMode'] as String,
+      hardwareAes: json['hardwareAes'] as bool?,
     );
   }
 }

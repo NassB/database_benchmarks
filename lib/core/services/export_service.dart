@@ -34,6 +34,7 @@ class ExportService {
         'ops_per_sec',
         'db_size_bytes',
         'wal_size_bytes',
+        'hardware_aes',
         'success',
       ],
       ...runs.map(
@@ -49,6 +50,7 @@ class ExportService {
           run.summary.opsPerSec,
           run.summary.dbSizeBytes,
           run.summary.walSizeBytes,
+          run.deviceMetadata.hardwareAes,
           run.success,
         ],
       ),

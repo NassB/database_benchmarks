@@ -42,6 +42,7 @@ It runs equivalent workloads against selected engines with the same scenario set
 - Live log panel showing iteration progress in real time.
 - Statistical summary: total, mean, median, min, max, p95, ops/s.
 - DB file size and WAL file size captured after each run.
+- Hardware AES capability detection captured per run for encrypted-engine context.
 - Persistent run history stored locally as JSON.
 - Export individual runs as **JSON** or export any set of runs as **CSV**.
 - Share exports directly from the device via the system share sheet.
@@ -349,4 +350,3 @@ flutter test test/
 - **Persist settings** — write `settingsProvider` state to shared preferences so choices survive app restarts.
 - **Global CSV export** — export the entire history across all scenarios in one file.
 - **Scenario presets** — save named configurations for quick recall.
-- **Hardware AES detection** — surface whether the device has hardware-accelerated AES, which can significantly affect encrypted-engine results.
